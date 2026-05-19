@@ -53,7 +53,7 @@ function App() {
         </FadeUp>
         <FadeUp delay={0.2}>
           <p className="text-xl md:text-3xl text-gray-400 font-medium max-w-2xl">
-            Software Developer & Data Systems Creator.
+            Software Developer.
           </p>
         </FadeUp>
       </section>
