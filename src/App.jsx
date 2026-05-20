@@ -75,22 +75,17 @@ function App() {
             <FadeUp key={project.id}>
               <div className="group cursor-pointer">
                 {/* พื้นที่สำหรับแสดงรูปภาพแบบเต็มกรอบ (Full Bleed) */}
-                {/* พื้นที่สำหรับแสดงรูปภาพโปรเจกต์ (สัดส่วน 90% สวยทุกหน้าจอ) */}
-                <div className="w-full h-[350px] md:h-[550px] bg-[#111111] rounded-[2rem] md:rounded-[2.5rem] mb-8 flex items-center justify-center overflow-hidden border border-white/5 shadow-2xl relative transition-all duration-700 hover:border-white/10">
-                  
-                  {/* แสงเงาพื้นหลังให้ดูพรีเมียม */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-white/[0.04] to-transparent pointer-events-none"></div>
-
+                <div className="w-full h-80 md:h-[500px] rounded-[2rem] mb-8 overflow-hidden transition-transform duration-700 group-hover:scale-[1.02] border border-white/10 shadow-2xl relative bg-[#151516]">
                   <img 
                     src={project.image} 
                     alt={project.title} 
-                    // หัวใจหลักอยู่ตรงนี้: w-[90%] h-[90%] และ object-contain
-                    // จะทำให้รูปขยายเกือบเต็มกล่องพอดี ไม่ว่าจะจอเล็กจอใหญ่ และไม่โดนตัดแหว่ง
-                    className="relative z-10 w-[90%] h-[90%] object-contain drop-shadow-[0_30px_40px_rgba(0,0,0,0.8)] opacity-90 group-hover:opacity-100 transition-all duration-700 group-hover:scale-[1.03] group-hover:-translate-y-2"
+                    // ใช้ object-cover เพื่อให้รูปเต็มกรอบ 100% 
+                    // เพิ่ม group-hover:scale-105 เพื่อให้รูปค่อยๆ ซูมเข้าไปอย่างนุ่มนวลเวลาชี้เมาส์
+                    className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
                     
                     onError={(e) => {
                       e.target.style.display = 'none';
-                      e.target.parentElement.innerHTML = '<div class="text-gray-600 text-sm z-10">Image not found</div>';
+                      e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-600 bg-[#151516]">Please add image to public folder</div>';
                     }}
                   />
                 </div>
