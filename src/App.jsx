@@ -36,10 +36,10 @@ function App() {
     },
     {
       id: 3,
-      title: "Geoinformatics & Carbon Footprint",
-      description: "งานวิเคราะห์ข้อมูลเชิงพื้นที่และประเมินคาร์บอนฟุตพรินต์",
-      tech: "GIS, Spatial Data, Python",
-      image: "/geo.png" // ต้องนำรูปชื่อนี้ไปใส่ในโฟลเดอร์ public
+      title: "EGAT Transformer Management",
+      description: "ระบบจัดการและติดตามสถานะหม้อแปลงไฟฟ้า พร้อมผสานข้อมูลพยากรณ์อากาศ",
+      tech: "React, Google Apps Script (GAS), Weather API,App Sheet",
+      image: "/egat.png" 
     }
   ];
 
