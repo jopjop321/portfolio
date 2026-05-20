@@ -75,19 +75,26 @@ function App() {
             <FadeUp key={project.id}>
               <div className="group cursor-pointer">
                 {/* พื้นที่สำหรับแสดงรูปภาพแบบเต็มกรอบ (Full Bleed) */}
-                <div className="w-full h-80 md:h-[500px] rounded-[2rem] mb-8 overflow-hidden transition-transform duration-700 group-hover:scale-[1.02] border border-white/10 shadow-2xl relative bg-[#151516]">
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    // ใช้ object-cover เพื่อให้รูปเต็มกรอบ 100% 
-                    // เพิ่ม group-hover:scale-105 เพื่อให้รูปค่อยๆ ซูมเข้าไปอย่างนุ่มนวลเวลาชี้เมาส์
-                    className="w-full h-full object-cover object-top opacity-85 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-                    
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-600 bg-[#151516]">Please add image to public folder</div>';
-                    }}
-                  />
+                <div className="w-full bg-[#151516] rounded-3xl mb-8 overflow-hidden transition-transform duration-700 group-hover:scale-[1.02] border border-white/10 shadow-2xl">
+                  
+                  {/* ใช้ Aspect Ratio คุมขนาดกล่อง: 
+                    บนมือถือ (aspect-square) กล่องจะเป็นจัตุรัส เพื่อให้มีพื้นที่วางแอปแนวตั้ง 
+                    บนคอม (md:aspect-video) กล่องจะเป็นแนวนอน (16:9) เพื่อโชว์เว็บแนวนอน 
+                  */}
+                  <div className="w-full aspect-square md:aspect-video flex items-center justify-center p-4 md:p-0">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      // บนมือถือใช้ object-contain (โชว์รูปเต็มไม่โดนตัด)
+                      // บนคอมใช้ object-cover (ขยายรูปเต็มกรอบแบบที่คุณชอบในตอนแรก)
+                      className="w-full h-full object-contain md:object-cover object-top opacity-85 group-hover:opacity-100 transition-opacity duration-500 rounded-xl md:rounded-none"
+                      
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentElement.innerHTML = '<div class="text-gray-600 text-sm">Please add image</div>';
+                      }}
+                    />
+                  </div>
                 </div>
                 <h3 className="text-3xl font-semibold mb-3">{project.title}</h3>
                 <p className="text-gray-400 text-lg mb-4">{project.description}</p>
