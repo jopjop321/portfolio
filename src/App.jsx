@@ -66,7 +66,7 @@ function App() {
       <section id="works" className="py-32 px-6 max-w-5xl mx-auto">
         <FadeUp>
           <h2 className="text-4xl md:text-5xl font-semibold mb-20 text-center">
-            Selected Works.
+             Works.
           </h2>
         </FadeUp>
 
