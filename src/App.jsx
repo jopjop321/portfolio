@@ -128,7 +128,7 @@ function App() {
             สนใจพูดคุยเรื่องเทคโนโลยี แลกเปลี่ยนไอเดีย หรือมีโปรเจกต์ที่อยากร่วมงานกัน สามารถติดต่อผมได้เลยครับ
           </p>
           <a 
-            href="mailto:your.email@example.com" 
+            href="mailto:jobsupachai@gmail.com" 
             className="inline-block bg-white text-black font-semibold px-8 py-4 rounded-full hover:scale-105 transition-transform duration-300"
           >
             Say Hello
