@@ -1,0 +1,37 @@
+// src/data/translations.js
+export const translations = {
+  en: {
+    title: "Wealth Growth",
+    subtitle: "Compound Interest Calculator",
+    inv: "Initial Investment (฿)",
+    mon: "Monthly Contribution (฿)",
+    rate: "Expected Return (%)",
+    time: "Time Horizon (Years)",
+    yr: "YR",
+    proj: "Projected Wealth",
+    totCont: "Total Contributions",
+    totInt: "Total Interest Earned",
+    val: "Total Value",
+    invested: "Total Invested",
+    earn: "Interest Earned",
+    start: "Start",
+    yearLabel: "Year",
+  },
+  th: {
+    title: "การเติบโตของความมั่งคั่ง",
+    subtitle: "เครื่องมือคำนวณดอกเบี้ยทบต้น",
+    inv: "เงินลงทุนเริ่มต้น (฿)",
+    mon: "เงินลงทุนรายเดือน (฿)",
+    rate: "ผลตอบแทนคาดหวัง (%)",
+    time: "ระยะเวลาการลงทุน (ปี)",
+    yr: "ปี",
+    proj: "มูลค่าความมั่งคั่งในอนาคต",
+    totCont: "เงินลงทุนสะสมทั้งหมด",
+    totInt: "ดอกเบี้ยที่ได้รับทั้งหมด",
+    val: "มูลค่ารวมทั้งหมด",
+    invested: "เงินลงทุนสะสม",
+    earn: "ดอกเบี้ยที่ได้รับ",
+    start: "เริ่มต้น",
+    yearLabel: "ปีที่",
+  }
+};
