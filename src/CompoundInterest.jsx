@@ -2,12 +2,12 @@
 import React, { useState, useMemo } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { motion } from 'framer-motion';
-
-// ดึงไฟล์คำแปลภาษาเข้ามาใช้งาน (ปรับ path ย่อยตามโฟลเดอร์จริงที่คุณวางไฟล์ไว้ได้เลยครับ)
+import { useLanguage } from './App'; // เรียกใช้งานระบบภาษา Global
 import { translations } from './data/translations'; 
 
 function CompoundInterest() {
-  const [lang, setLang] = useState('en');
+  // ดึงภาษาจาก Context มาใช้ (เมื่อกดเปลี่ยนที่ Navbar ตรงนี้จะเปลี่ยนตามอัติโนมัติ)
+  const { lang } = useLanguage();
   const t = translations[lang];
 
   const [principal, setPrincipal] = useState(''); 
@@ -60,22 +60,7 @@ function CompoundInterest() {
         {/* ฝั่งซ้าย: แผงควบคุมตัวเลข */}
         <div className="w-full lg:w-[35%] flex flex-col gap-6">
           <div>
-            <div className="flex items-center gap-3 bg-white/5 rounded-full px-4 py-1.5 border border-white/10 w-fit mb-6">
-              <button 
-                onClick={() => setLang('en')} 
-                className={`text-xs font-semibold tracking-widest transition-colors ${lang === 'en' ? 'text-[#C5A059]' : 'text-gray-500 hover:text-white'}`}
-              >
-                EN
-              </button>
-              <span className="text-gray-600 text-xs">|</span>
-              <button 
-                onClick={() => setLang('th')} 
-                className={`text-xs font-semibold tracking-widest transition-colors ${lang === 'th' ? 'text-[#C5A059]' : 'text-gray-500 hover:text-white'}`}
-              >
-                TH
-              </button>
-            </div>
-
+            {/* เอาเมนูปุ่มสลับภาษาอันเก่าออกไปเรียบร้อยแล้วเพื่อให้คลีนตา */}
             <h2 className="text-3xl font-semibold mb-1 text-white transition-all">{t.title}</h2>
             <p className="text-sm text-gray-400 font-light transition-all">{t.subtitle}</p>
           </div>
