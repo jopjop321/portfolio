@@ -74,7 +74,7 @@ function Tax() {
   const { lang, toggleLanguage } = useLanguage();
   const t = translations[lang];
 
-  // --- STATE 1: INCOME PARAMETERS ---
+  // --- STATE 1: INCOME ARCHITECTURE ---
   const [activeIncomeCat, setActiveIncomeCat] = useState('job');
   const [activeIncomes, setActiveIncomes] = useState({
     salary: false, bonus: false, freelance: false, copyright: false, dividend: false,
@@ -95,7 +95,7 @@ function Tax() {
     medicalExpert: '', otherExpert: '', contractor: '', commerce43: '', commerceOther: ''
   });
 
-  // --- STATE 2: NEW DEDUCTION PARAMETERS ---
+  // --- STATE 2: DEDUCTION ARCHITECTURE ---
   const [activeDeductionCat, setActiveDeductionCat] = useState('personal');
   const [activeDeductions, setActiveDeductions] = useState({
     spouse: false, childrenOld: false, childrenNew: false, fosterChild: false, parentsCare: false, disabledCare: false, maternity: false,
@@ -110,10 +110,10 @@ function Tax() {
     lifeInsuranceAmount: '', healthOwnAmount: '', healthParentsAmount: '',
     socialSecurityAmount: '', pvdGbkAmount: '', nsfAmount: '', pensionAmount: '', rmfAmount: '', ssfAmount: '', thaiESGAmount: '',
     homeLoanAmount: '', easyReceiptAmount: '', localTravelAmount: '',
-    donationEduAmount: '', deductionGeneralAmount: '', donationPoliticalAmount: ''
+    donationEduAmount: '', donationGeneralAmount: '', donationPoliticalAmount: ''
   });
 
-  // Structural Toggles and Data Cleaner
+  // Structural Cleanups
   const toggleIncome = (key) => {
     setActiveIncomes(prev => ({ ...prev, [key]: !prev[key] }));
     if (activeIncomes[key]) {
@@ -130,7 +130,7 @@ function Tax() {
     }
   };
 
-  // --- ULTRA COMPREHENSIVE REVENUE PIPELINE ---
+  // --- PIPELINE TAX ENGINE ---
   const taxData = useMemo(() => {
     const vSalary = activeIncomes.salary ? Number(incomeValues.salary) * 12 : 0;
     const vBonus = activeIncomes.bonus ? Number(incomeValues.bonus) : 0;
@@ -151,25 +151,32 @@ function Tax() {
 
     const totalAnnualIncome = vSalary + vBonus + vFreelance + vCopyright + vDividend + vRentBuild + vRentAgri + vRentOtherLand + vRentVehicle + vRentOtherAsset + vMedExpert + vOthExpert + vContractor + vActor + vCommerce43 + vCommerceOther;
 
-    // Expenses Calculator By Revenue Clauses
+    // ─── แก้ไขจุดที่ 2: ดักจับต้นทุนตามจริงไม่ให้มากกว่ารายได้พึงประเมิน ───
     const expType12 = Math.min((vSalary + vBonus + vFreelance) * 0.5, 100000);
-    const expCopyright = activeIncomes.copyright ? (useActualExpenses.copyright ? Number(actualExpenseValues.copyright) : Math.min(vCopyright * 0.5, 100000)) : 0;
-    const expRentBuild = activeIncomes.rentBuilding ? (useActualExpenses.rentBuilding ? Number(actualExpenseValues.rentBuilding) : vRentBuild * 0.30) : 0;
-    const expRentAgri = activeIncomes.rentAgriLand ? (useActualExpenses.rentAgriLand ? Number(actualExpenseValues.rentAgriLand) : vRentAgri * 0.20) : 0;
-    const expRentOtherLand = activeIncomes.rentOtherLand ? (useActualExpenses.rentOtherLand ? Number(actualExpenseValues.rentOtherLand) : vRentOtherLand * 0.15) : 0;
-    const expRentVehicle = activeIncomes.rentVehicle ? (useActualExpenses.rentVehicle ? Number(actualExpenseValues.rentVehicle) : vRentVehicle * 0.30) : 0;
-    const expRentOtherAsset = activeIncomes.rentOtherAsset ? (useActualExpenses.rentOtherAsset ? Number(actualExpenseValues.rentOtherAsset) : vRentOtherAsset * 0.10) : 0;
-    const expMed = activeIncomes.medicalExpert ? (useActualExpenses.medicalExpert ? Number(actualExpenseValues.medicalExpert) : vMedExpert * 0.60) : 0;
-    const expOth = activeIncomes.otherExpert ? (useActualExpenses.otherExpert ? Number(actualExpenseValues.otherExpert) : vOthExpert * 0.30) : 0;
-    const expContractor = activeIncomes.contractor ? (useActualExpenses.contractor ? Number(actualExpenseValues.contractor) : vContractor * 0.60) : 0;
+    
+    const expCopyright = activeIncomes.copyright 
+      ? (useActualExpenses.copyright ? Math.min(Number(actualExpenseValues.copyright), vCopyright) : Math.min(vCopyright * 0.5, 100000)) 
+      : 0;
+      
+    const expRentBuild = activeIncomes.rentBuilding ? (useActualExpenses.rentBuilding ? Math.min(Number(actualExpenseValues.rentBuilding), vRentBuild) : vRentBuild * 0.30) : 0;
+    const expRentAgri = activeIncomes.rentAgriLand ? (useActualExpenses.rentAgriLand ? Math.min(Number(actualExpenseValues.rentAgriLand), vRentAgri) : vRentAgri * 0.20) : 0;
+    const expRentOtherLand = activeIncomes.rentOtherLand ? (useActualExpenses.rentOtherLand ? Math.min(Number(actualExpenseValues.rentOtherLand), vRentOtherLand) : vRentOtherLand * 0.15) : 0;
+    const expRentVehicle = activeIncomes.rentVehicle ? (useActualExpenses.rentVehicle ? Math.min(Number(actualExpenseValues.rentVehicle), vRentVehicle) : vRentVehicle * 0.30) : 0;
+    const expRentOtherAsset = activeIncomes.rentOtherAsset ? (useActualExpenses.rentOtherAsset ? Math.min(Number(actualExpenseValues.rentOtherAsset), vRentOtherAsset) : vRentOtherAsset * 0.10) : 0;
+    
+    const expMed = activeIncomes.medicalExpert ? (useActualExpenses.medicalExpert ? Math.min(Number(actualExpenseValues.medicalExpert), vMedExpert) : vMedExpert * 0.60) : 0;
+    const expOth = activeIncomes.otherExpert ? (useActualExpenses.otherExpert ? Math.min(Number(actualExpenseValues.otherExpert), vOthExpert) : vOthExpert * 0.30) : 0;
+    const expContractor = activeIncomes.contractor ? (useActualExpenses.contractor ? Math.min(Number(actualExpenseValues.contractor), vContractor) : vContractor * 0.60) : 0;
+    
     let expActor = activeIncomes.actor ? (vActor <= 300000 ? vActor * 0.60 : 180000 + (vActor - 300000) * 0.40) : 0;
     if (activeIncomes.actor) expActor = Math.min(expActor, 600000);
-    const expCommerce43 = activeIncomes.commerce43 ? (useActualExpenses.commerce43 ? Number(actualExpenseValues.commerce43) : vCommerce43 * 0.60) : 0;
-    const expCommerceOther = activeIncomes.commerceOther ? Number(actualExpenseValues.commerceOther) : 0;
+    
+    const expCommerce43 = activeIncomes.commerce43 ? (useActualExpenses.commerce43 ? Math.min(Number(actualExpenseValues.commerce43), vCommerce43) : vCommerce43 * 0.60) : 0;
+    const expCommerceOther = activeIncomes.commerceOther ? Math.min(Number(actualExpenseValues.commerceOther), vCommerceOther) : 0;
 
     const totalExpenses = expType12 + expCopyright + expRentBuild + expRentAgri + expRentOtherLand + expRentVehicle + expRentOtherAsset + expMed + expOth + expContractor + expActor + expCommerce43 + expCommerceOther;
 
-    // Deductions Groups Validator Pipeline
+    // Deductions Groups Engine
     const dPersonal = 60000;
     const dSpouse = activeDeductions.spouse ? 60000 : 0;
     const dChildOld = activeDeductions.childrenOld ? Number(deductionValues.childrenOldCount) * 30000 : 0;
@@ -210,19 +217,21 @@ function Tax() {
     const baseDeductionsSum = totalGroup1 + totalGroup2 + totalGroup3 + totalGroup4;
     const incomeBeforeDonations = Math.max(0, totalAnnualIncome - totalExpenses - baseDeductionsSum);
 
+    // ─── แก้ไขจุดที่ 1: จัดการอัตราหักลดหย่อนเงินบริจาคเพื่อการศึกษา 2 เท่าเต็มจำนวน ───
     const vDonationEdu = activeDeductions.donationEdu ? (Number(deductionValues.donationEduAmount) * 2) : 0;
     const safeDonationEdu = Math.min(vDonationEdu, incomeBeforeDonations * 0.10);
 
-    const remIncomeAfterEdu = incomeBeforeDonations - (safeDonationEdu / 2);
+    const remIncomeAfterEdu = incomeBeforeDonations - safeDonationEdu;
     const vDonationGen = activeDeductions.donationGeneral ? Number(deductionValues.donationGeneralAmount) : 0;
     const safeDonationGen = Math.min(vDonationGen, remIncomeAfterEdu * 0.10);
 
     const dPolitical = activeDeductions.donationPolitical ? Math.min(Number(deductionValues.donationPoliticalAmount), 10000) : 0;
 
     const totalGroup5 = safeDonationEdu + safeDonationGen + dPolitical;
-
     const totalDeductions = baseDeductionsSum + totalGroup5;
-    const netIncome = Math.max(0, incomeBeforeDonations - (safeDonationEdu / 2) - safeDonationGen - dPolitical);
+
+    // คำนวณเงินได้สุทธิ และภาษีขั้นบันไดบุคคลธรรมดา
+    const netIncome = Math.max(0, incomeBeforeDonations - safeDonationEdu - safeDonationGen - dPolitical);
     
     let taxPayable = 0;
     if (netIncome > 150000) {
@@ -242,7 +251,7 @@ function Tax() {
     <div className="min-h-screen bg-[#030303] text-white font-sans antialiased selection:bg-[#C5A059]/30 relative overflow-hidden">
       <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#C5A059] opacity-[0.04] blur-[120px] rounded-full pointer-events-none"></div>
 
-      {/* Header Panel */}
+      {/* Header Bar Panel */}
       <header className="relative z-10 flex items-center justify-between px-6 py-6 md:px-12 max-w-7xl mx-auto">
         <div className="text-xl font-semibold tracking-tighter flex items-center gap-2">
           <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#4A72FF] to-[#C5A059]"></div>
@@ -258,7 +267,7 @@ function Tax() {
         </div>
       </header>
 
-      {/* Workspace Area */}
+      {/* Main Container Layout */}
       <main className="max-w-7xl mx-auto pb-24 px-6 md:px-12 pt-12 relative z-10">
         <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="mb-12 border-b border-white/5 pb-8">
           <span className="text-xs uppercase tracking-widest text-[#C5A059] font-medium mb-2 block">{t.taxNav}</span>
@@ -269,10 +278,10 @@ function Tax() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* LEFT INTERACTIVE PANEL */}
+          {/* ฝั่งซ้ายแผงฟอร์มกรอกข้อมูล */}
           <div className="lg:col-span-7 space-y-8">
             
-            {/* 1. SOURCES OF INCOME BLOCK */}
+            {/* 1. SOURCES OF INCOME CONTAINER BLOCK */}
             <div className="bg-[#0A0A0C] border border-white/5 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl backdrop-blur-md">
               <div className="flex items-center space-x-3 mb-2">
                 <div className="w-1.5 h-6 bg-[#C5A059] rounded-full" />
@@ -328,7 +337,7 @@ function Tax() {
                 </AnimatePresence>
               </div>
 
-              {/* 🛠️ แก้ไขซ่อนช่องว่างฝั่งรายได้พึงประเมินกรณีไม่มีการเปิดใช้งานปุ่มย่อย */}
+              {/* อนิเมชันซ่อนและขยายช่องข้อมูลฝั่งรายได้ตามเงื่อนไข (ไม่ทิ้งพื้นที่ว่างเปล่า) */}
               <AnimatePresence>
                 {Object.values(activeIncomes).some(Boolean) && (
                   <motion.div 
@@ -423,7 +432,7 @@ function Tax() {
               </AnimatePresence>
             </div>
 
-            {/* 2. TAX DEDUCTIONS CONFIGURATION BLOCK */}
+            {/* 2. TAX DEDUCTIONS ARCHITECTURE BLOCK */}
             <div className="bg-[#0A0A0C] border border-white/5 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl backdrop-blur-md">
               <div className="flex items-center space-x-3 mb-4">
                 <div className="w-1.5 h-6 bg-[#C5A059] rounded-full" />
@@ -519,7 +528,7 @@ function Tax() {
                     {activeDeductions.localTravel && activeDeductionCat === 'economy' && <Input label={t.inputTravelAmount} value={deductionValues.localTravelAmount} onChange={(e) => setDeductionValues({ ...deductionValues, localTravelAmount: e.target.value })} placeholder="0" />}
                     
                     {activeDeductions.donationEdu && activeDeductionCat === 'donation' && <Input label={t.inputDonationEduAmount} value={deductionValues.donationEduAmount} onChange={(e) => setDeductionValues({ ...deductionValues, donationEduAmount: e.target.value })} placeholder="0" />}
-                    {activeDeductions.donationGeneral && activeDeductionCat === 'donation' && <Input label={t.inputDonationGenAmount} value={deductionValues.deductionGeneralAmount} onChange={(e) => setDeductionValues({ ...deductionValues, deductionGeneralAmount: e.target.value })} placeholder="0" />}
+                    {activeDeductions.donationGeneral && activeDeductionCat === 'donation' && <Input label={t.inputDonationGenAmount} value={deductionValues.donationGeneralAmount} onChange={(e) => setDeductionValues({ ...deductionValues, donationGeneralAmount: e.target.value })} placeholder="0" />}
                     {activeDeductions.donationPolitical && activeDeductionCat === 'donation' && <Input label={t.inputDonationPolAmount} value={deductionValues.donationPoliticalAmount} onChange={(e) => setDeductionValues({ ...deductionValues, donationPoliticalAmount: e.target.value })} placeholder="0" />}
                   </motion.div>
                 )}
@@ -527,7 +536,7 @@ function Tax() {
             </div>
           </div>
 
-          {/* RIGHT SIDE ACCOUNT STATEMENT */}
+          {/* ฝั่งขวา แดชบอร์ดสรุปผลภาษีสไตล์โมเดิร์นลักชัวรี */}
           <div className="lg:col-span-5 lg:sticky lg:top-12">
             <div className="bg-gradient-to-b from-[#0F0F12] to-[#070709] border border-white/10 rounded-3xl p-8 space-y-6 shadow-2xl relative overflow-hidden">
               <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none" />
