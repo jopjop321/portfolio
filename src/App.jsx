@@ -13,12 +13,19 @@ export function useLanguage() {
 
 function App() {
   const [lang, setLang] = useState(() => {
+    // อ่านจาก localStorage ก่อน ถ้าไม่มีค่อย detect จาก browser
+    const saved = localStorage.getItem('lang');
+    if (saved) return saved;
     const browserLang = navigator.language || navigator.userLanguage;
     return browserLang.startsWith('th') ? 'th' : 'en';
   });
 
   const toggleLanguage = () => {
-    setLang((prevLang) => (prevLang === 'en' ? 'th' : 'en'));
+    setLang((prevLang) => {
+      const next = prevLang === 'en' ? 'th' : 'en';
+      localStorage.setItem('lang', next); // บันทึกทุกครั้งที่กดสลับ
+      return next;
+    });
   };
 
   return (
