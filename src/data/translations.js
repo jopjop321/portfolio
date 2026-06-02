@@ -28,7 +28,7 @@ export const translations = {
     yearLabel: "Year",
     btnGoWealth: "Explore Wealth Management →",
     
-    // 🛠️ TAX SYSTEM TRANSLATIONS
+    // TAX AUDITING ENGINE TRANSLATIONS
     taxNav: "Tax Optimization",
     taxDesc: "Personal Income Tax Planning Engine",
     taxHero1: "Optimize your liabilities.",
@@ -48,8 +48,6 @@ export const translations = {
     taxSaved: "Tax Saved from Planning",
     taxGraphBefore: "Before Planning",
     taxGraphAfter: "After Planning",
-
-    // --- LOCAL TAX TRANSLATIONS FROM TRANSLATIONS ---
     incomeTitle: "1. Sources of Income",
     incomeTab1: "Salary/General",
     incomeTab2: "Investment",
@@ -120,7 +118,7 @@ export const translations = {
     btnActual: "Toggle Actual Expenses Document Claim",
     actualInput: "Specify documented actual expenses according to criteria",
 
-    // --- 🌟 NEW TRANSLATIONS FOR TAX DEDUCTIONS CATEGORIES (5 GROUPS) ---
+    // DEDUCTIONS GROUPS TRANSLATIONS
     deductTitle: "2. Tax Deductions & Allowances",
     deductTab1: "Personal/Family",
     deductTab2: "Insurance/Health",
@@ -128,8 +126,6 @@ export const translations = {
     deductTab4: "Property/Gov",
     deductTab5: "Donation Group",
     deductLabel: "Total Deductions & Allowances Used",
-    
-    // Group 1: Personal / Family Items
     spouseLabel: "Spouse Allowance",
     spouseSub: "No income (60,000 THB)",
     childOldLabel: "Child (Before 2018)",
@@ -144,16 +140,12 @@ export const translations = {
     disabledCareSub: "60,000 THB each",
     maternityLabel: "Maternity / Pregnancy",
     maternitySub: "Actual max 60,000 THB",
-
-    // Group 2: Insurance Items
     lifeInsLabel: "Life/Deposit Insurance",
     lifeInsSub: "Actual max 100,000 THB",
     healthOwnLabel: "Personal Health Insurance",
     healthOwnSub: "Actual max 25,000 THB",
     healthParentsLabel: "Parents Health Insurance",
     healthParentsSub: "Actual max 15,000 THB",
-
-    // Group 3: Retirement Items
     socialSecurityLabel: "Social Security Fund",
     socialSecuritySub: "Actual max 9,000 THB",
     pvdGbkLabel: "Provident Fund / GPF",
@@ -168,24 +160,18 @@ export const translations = {
     ssfSub: "Max 30% (Retirement pool)",
     thaiESGLabel: "ThaiESG Fund Investment",
     thaiESGSub: "Max 30% max 300,000 THB",
-
-    // Group 4: Property & Gov Measures
     homeLoanLabel: "Home Loan Interest",
     homeLoanSub: "Actual max 100,000 THB",
     easyReceiptLabel: "Easy e-Receipt 2.0",
     easyReceiptSub: "Actual max 50,000 THB",
     localTravelLabel: "Secondary City Travel",
     localTravelSub: "Actual max 30,000 THB",
-
-    // Group 5: Donations
     donationEduLabel: "Education/Sport/Gov Hospital",
     donationEduSub: "Deduct 2x of actual paid amount",
     donationGenLabel: "General Charity Donation",
     donationGenSub: "Actual paid max 10% of net",
     donationPolLabel: "Political Party Donation",
     donationPolSub: "Actual paid max 10,000 THB",
-
-    // Inputs Labels for Deductions
     inputChildOldCount: "Number of children born before 2018 (Specify persons)",
     inputChildNewCount: "Number of children born in/after 2018 (Specify persons)",
     inputFosterCount: "Number of foster children (Max 3 people)",
@@ -239,7 +225,7 @@ export const translations = {
     yearLabel: "ปีที่",
     btnGoWealth: "สำรวจระบบจัดการความมั่งคั่ง →",
 
-    // 🛠️ TAX SYSTEM TRANSLATIONS
+    // TAX AUDITING ENGINE TRANSLATIONS
     taxNav: "วางแผนภาษี",
     taxDesc: "ระบบคำนวณและวางแผนภาษีบุคคลธรรมดา",
     taxHero1: "ลดหย่อนภาษีอย่างชาญฉลาด",
@@ -259,8 +245,6 @@ export const translations = {
     taxSaved: "ภาษีที่ประหยัดได้",
     taxGraphBefore: "ก่อนวางแผน",
     taxGraphAfter: "หลังวางแผน",
-
-    // --- NEW LOCAL TAX TRANSLATIONS ---
     incomeTitle: "1. Sources of Income (หมวดหมู่ประเภทรายได้)",
     incomeTab1: "เงินเดือน/งานทั่วไป",
     incomeTab2: "การลงทุน/หุ้น",
@@ -331,7 +315,7 @@ export const translations = {
     btnActual: "ต้องการแสดงหลักฐานหักค่าใช้จ่ายตามจริง",
     actualInput: "ระบุเอกสารค่าใช้จ่ายจริงที่จำเป็นและสมควรตามหลักฐาน",
 
-    // --- 🌟 NEW TRANSLATIONS FOR TAX DEDUCTIONS CATEGORIES (5 GROUPS) ---
+    // DEDUCTIONS GROUPS TRANSLATIONS
     deductTitle: "2. Select Tax Category (เลือกกลุ่มลดหย่อน)",
     deductTab1: "ส่วนตัว/ครอบครัว",
     deductTab2: "ประกัน/สุขภาพ",
@@ -339,8 +323,6 @@ export const translations = {
     deductTab4: "อสังหาฯ/มาตรการรัฐ",
     deductTab5: "กลุ่มเงินบริจาค",
     deductLabel: "หักสิทธิ์รายการลดหย่อนรวม",
-
-    // Group 1: Personal / Family Items
     spouseLabel: "ลดหย่อนคู่สมรส",
     spouseSub: "กรณีคู่สมรสไม่มีรายได้ (60,000 บ.)",
     childOldLabel: "บุตร (เกิดก่อนปี 61)",
@@ -355,16 +337,12 @@ export const translations = {
     disabledCareSub: "คนละ 60,000 บาท",
     maternityLabel: "ค่าฝากครรภ์/คลอดบุตร",
     maternitySub: "ตามจ่ายจริง ไม่เกิน 60,000 บ.",
-
-    // Group 2: Insurance Items
     lifeInsLabel: "ประกันชีวิต/เงินฝากแบบมีประกัน",
     lifeInsSub: "ตามจ่ายจริง ไม่เกิน 100,000 บ.",
     healthOwnLabel: "ประกันสุขภาพตนเอง",
     healthOwnSub: "ตามจ่ายจริง ไม่เกิน 25,000 บ.",
     healthParentsLabel: "ประกันสุขภาพพ่อแม่",
     healthParentsSub: "ตามจ่ายจริง ไม่เกิน 15,000 บ.",
-
-    // Group 3: Retirement Items
     socialSecurityLabel: "เงินสมทบประกันสังคม",
     socialSecuritySub: "ตามจ่ายจริง ไม่เกิน 9,000 บ.",
     pvdGbkLabel: "PVD / กบข. / กองทุนครู",
@@ -379,24 +357,18 @@ export const translations = {
     ssfSub: "ไม่เกิน 30% (รวมกลุ่มเกษียณ)",
     thaiESGLabel: "ลงทุนกองทุน ThaiESG",
     thaiESGSub: "ไม่เกิน 30% สูงสุด 300,000 บ.",
-
-    // Group 4: Property & Gov Measures
     homeLoanLabel: "ดอกเบี้ยเงินกู้ยืมบ้าน",
     homeLoanSub: "ตามจ่ายจริง ไม่เกิน 100,000 บ.",
     easyReceiptLabel: "Easy e-Receipt 2.0",
     easyReceiptSub: "ตามจ่ายจริง ไม่เกิน 50,000 บ.",
     localTravelLabel: "ท่องเที่ยวเมืองรอง",
     localTravelSub: "ตามจ่ายจริง ไม่เกิน 30,000 บ.",
-
-    // Group 5: Donations
     donationEduLabel: "บริจาคเพื่อการศึกษา/กีฬา/รพ.รัฐ",
     donationEduSub: "หักลดหย่อนได้ 2 เท่าของที่จ่ายจริง",
     donationGenLabel: "เงินบริจาคทั่วไป / มูลนิธิ",
     donationGenSub: "ตามจริงสูงสุดไม่เกิน 10% ของสุทธิ",
     donationPolLabel: "บริจาคให้พรรคการเมือง",
     donationPolSub: "ตามจริงสูงสุดไม่เกิน 10,000 บ.",
-
-    // Inputs Labels for Deductions
     inputChildOldCount: "จำนวนบุตรที่เกิดก่อนปี พ.ศ. 2561 (ระบุจำนวนคน)",
     inputChildNewCount: "จำนวนบุตรที่เกิดตั้งแต่ปี พ.ศ. 2561 เป็นต้นไป (ระบุจำนวนคน)",
     inputFosterCount: "จำนวนบุตรบุญธรรมที่ต้องการใช้สิทธิ์ (รวมสูงสุดไม่เกิน 3 คน)",
