@@ -483,7 +483,7 @@ function Tax() {
                       <ToggleButton label={t.nsfLabel} subtitle={t.nsfSub} active={activeDeductions.nsf} onClick={() => toggleDeduction('nsf')} />
                       <ToggleButton label={t.pensionLabel} subtitle={t.pensionSub} active={activeDeductions.pensionInsurance} onClick={() => toggleDeduction('pensionInsurance')} />
                       <ToggleButton label={t.rmfLabel} subtitle={t.rmfSub} active={activeDeductions.rmf} onClick={() => toggleDeduction('rmf')} />
-                      <ToggleButton label={t.ssfLabel} subtitle={t.ssfSub} active={activeDeductions.ssf} onClick={() => toggleDeduction('ssf')} />
+                      {/* <ToggleButton label={t.ssfLabel} subtitle={t.ssfSub} active={activeDeductions.ssf} onClick={() => toggleDeduction('ssf')} /> */} 
                       <ToggleButton label={t.thaiESGLabel} subtitle={t.thaiESGSub} active={activeDeductions.thaiESG} onClick={() => toggleDeduction('thaiESG')} />
                     </motion.div>
                   )}
