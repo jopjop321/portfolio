@@ -120,7 +120,7 @@ export const translations = {
     btnActual: "Toggle Actual Expenses Document Claim",
     actualInput: "Specify documented actual expenses according to criteria",
 
-    // --- 🌟 NEW TRANSLATIONS FOR TAX DEDUCTIONS CATEGORIES (5 GROUPS) ---
+    // --- TAX DEDUCTIONS CATEGORIES (5 GROUPS) ---
     deductTitle: "2. Tax Deductions & Allowances",
     deductTab1: "Personal/Family",
     deductTab2: "Insurance/Health",
@@ -173,7 +173,9 @@ export const translations = {
     homeLoanLabel: "Home Loan Interest",
     homeLoanSub: "Actual max 100,000 THB",
     easyReceiptLabel: "Easy e-Receipt 2.0",
-    easyReceiptSub: "Actual max 50,000 THB",
+    easyReceiptSub: "Max 50,000 THB (General 30k + OTOP 20k)",
+    inputEasyGeneralAmount: "1. General Goods or Services Spending (Max 30,000 THB)",
+    inputEasyOtopAmount: "2. OTOP / Community Enterprise Spending (Max 20,000 THB)",
     localTravelLabel: "Secondary City Travel",
     localTravelSub: "Actual max 30,000 THB",
 
@@ -203,7 +205,6 @@ export const translations = {
     inputSsfAmount: "Total SSF mutual fund investment for the whole year",
     inputThaiESGAmount: "Total ThaiESG mutual fund investment for the whole year",
     inputHomeAmount: "Actual home loan interest paid according to bank statement",
-    inputEasyAmount: "Easy e-Receipt total accumulated spending according to tax invoice",
     inputTravelAmount: "Secondary city travel verified business expenses amount",
     inputDonationEduAmount: "Actual donation paid for Education/Sport/Gov Hospital (System multiplies x2)",
     inputDonationGenAmount: "Actual donation amount paid to qualified charities or foundations",
@@ -331,7 +332,7 @@ export const translations = {
     btnActual: "ต้องการแสดงหลักฐานหักค่าใช้จ่ายตามจริง",
     actualInput: "ระบุเอกสารค่าใช้จ่ายจริงที่จำเป็นและสมควรตามหลักฐาน",
 
-    // --- 🌟 NEW TRANSLATIONS FOR TAX DEDUCTIONS CATEGORIES (5 GROUPS) ---
+    // --- TAX DEDUCTIONS CATEGORIES (5 GROUPS) ---
     deductTitle: "2. Select Tax Category (เลือกกลุ่มลดหย่อน)",
     deductTab1: "ส่วนตัว/ครอบครัว",
     deductTab2: "ประกัน/สุขภาพ",
@@ -384,7 +385,9 @@ export const translations = {
     homeLoanLabel: "ดอกเบี้ยเงินกู้ยืมบ้าน",
     homeLoanSub: "ตามจ่ายจริง ไม่เกิน 100,000 บ.",
     easyReceiptLabel: "Easy e-Receipt 2.0",
-    easyReceiptSub: "ตามจ่ายจริง ไม่เกิน 50,000 บ.",
+    easyReceiptSub: "ตามจริงไม่เกิน 50,000 บ. (ทั่วไป 3 หมื่น + OTOP 2 หมื่น)",
+    inputEasyGeneralAmount: "1. ยอดซื้อสินค้าหรือบริการทั่วไป (ลดหย่อนได้สูงสุด 30,000 บ.)",
+    inputEasyOtopAmount: "2. ยอดซื้อสินค้า OTOP / วิสาหกิจชุมชน (ลดหย่อนได้สูงสุด 20,000 บ.)",
     localTravelLabel: "ท่องเที่ยวเมืองรอง",
     localTravelSub: "ตามจ่ายจริง ไม่เกิน 30,000 บ.",
 
@@ -414,7 +417,6 @@ export const translations = {
     inputSsfAmount: "ยอดเงินลงทุนสะสมในกองทุนรวมเพื่อการออม (SSF) ปีนี้",
     inputThaiESGAmount: "ยอดเงินลงทุนสะสมในกองทุนรวมเพื่อความยั่งยืนของไทย (ThaiESG)",
     inputHomeAmount: "ดอกเบี้ยเงินกู้ยืมเพื่อซื้อที่อยู่อาศัยที่จ่ายจริงตามใบเสร็จธนาคาร",
-    inputEasyAmount: "ยอดซื้อสินค้าสะสมตามใบกำกับภาษีเต็มรูปแบบมาตรการ Easy e-Receipt",
     inputTravelAmount: "ยอดค่าใช้จ่ายท่องเที่ยวเมืองรองตามเงื่อนไขมาตรการที่ระบุ",
     inputDonationEduAmount: "จำนวนเงินที่บริจาคจริงให้แก่สถานศึกษา/กีฬา/รพ.รัฐ (ระบบประมวลคูณ 2 ให้)",
     inputDonationGenAmount: "จำนวนเงินที่บริจาคจริงให้แก่มูลนิธิ หรือสถานสาธารณกุศล",

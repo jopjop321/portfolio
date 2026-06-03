@@ -109,7 +109,7 @@ function Tax() {
     childrenOldCount: '', childrenNewCount: '', fosterChildCount: '', parentsCount: '', disabledCount: '', maternityAmount: '',
     lifeInsuranceAmount: '', healthOwnAmount: '', healthParentsAmount: '',
     socialSecurityAmount: '', pvdGbkAmount: '', nsfAmount: '', pensionAmount: '', rmfAmount: '', ssfAmount: '', thaiESGAmount: '',
-    homeLoanAmount: '', easyReceiptAmount: '', localTravelAmount: '',
+    homeLoanAmount: '', easyReceiptGeneralAmount: '', easyReceiptOtopAmount: '', localTravelAmount: '',
     donationEduAmount: '', donationGeneralAmount: '', donationPoliticalAmount: ''
   });
 
@@ -126,7 +126,11 @@ function Tax() {
   const toggleDeduction = (key) => {
     setActiveDeductions(prev => ({ ...prev, [key]: !prev[key] }));
     if (activeDeductions[key]) {
-      setDeductionValues(prev => ({ ...prev, [key]: '' }));
+      if (key === 'easyReceipt') {
+        setDeductionValues(prev => ({ ...prev, easyReceiptGeneralAmount: '', easyReceiptOtopAmount: '' }));
+      } else {
+        setDeductionValues(prev => ({ ...prev, [key + 'Amount']: '' }));
+      }
     }
   };
 
@@ -151,7 +155,7 @@ function Tax() {
 
     const totalAnnualIncome = vSalary + vBonus + vFreelance + vCopyright + vDividend + vRentBuild + vRentAgri + vRentOtherLand + vRentVehicle + vRentOtherAsset + vMedExpert + vOthExpert + vContractor + vActor + vCommerce43 + vCommerceOther;
 
-    // ─── แก้ไขจุดที่ 2: ดักจับต้นทุนตามจริงไม่ให้มากกว่ารายได้พึงประเมิน ───
+    // ─── ดักจับต้นทุนตามจริงไม่ให้มากกว่ารายได้พึงประเมิน ───
     const expType12 = Math.min((vSalary + vBonus + vFreelance) * 0.5, 100000);
     
     const expCopyright = activeIncomes.copyright 
@@ -209,7 +213,12 @@ function Tax() {
     const totalGroup3 = dSocial + retirementPoolSum + dThaiESG;
 
     const dHome = activeDeductions.homeLoanInterest ? Math.min(Number(deductionValues.homeLoanAmount), 100000) : 0;
-    const dEasyReceipt = activeDeductions.easyReceipt ? Math.min(Number(deductionValues.easyReceiptAmount), 50000) : 0;
+    
+    // ─── ปรับปรุงสูตรแยกยอดสิทธิ์การคำนวณมาตรการรัฐชุดใหม่ให้ไร้บัค ───
+    const safeEasyGeneral = Math.min(Number(deductionValues.easyReceiptGeneralAmount) || 0, 30000);
+    const safeEasyOtop = Math.min(Number(deductionValues.easyReceiptOtopAmount) || 0, 20000);
+    const dEasyReceipt = activeDeductions.easyReceipt ? (safeEasyGeneral + safeEasyOtop) : 0;
+    
     const dTravel = activeDeductions.localTravel ? Math.min(Number(deductionValues.localTravelAmount), 30000) : 0;
 
     const totalGroup4 = dHome + dEasyReceipt + dTravel;
@@ -217,7 +226,7 @@ function Tax() {
     const baseDeductionsSum = totalGroup1 + totalGroup2 + totalGroup3 + totalGroup4;
     const incomeBeforeDonations = Math.max(0, totalAnnualIncome - totalExpenses - baseDeductionsSum);
 
-    // ─── แก้ไขจุดที่ 1: จัดการอัตราหักลดหย่อนเงินบริจาคเพื่อการศึกษา 2 เท่าเต็มจำนวน ───
+    // ─── จัดการอัตราหักลดหย่อนเงินบริจาคเพื่อการศึกษา 2 เท่าเต็มจำนวน ───
     const vDonationEdu = activeDeductions.donationEdu ? (Number(deductionValues.donationEduAmount) * 2) : 0;
     const safeDonationEdu = Math.min(vDonationEdu, incomeBeforeDonations * 0.10);
 
@@ -337,7 +346,7 @@ function Tax() {
                 </AnimatePresence>
               </div>
 
-              {/* อนิเมชันซ่อนและขยายช่องข้อมูลฝั่งรายได้ตามเงื่อนไข (ไม่ทิ้งพื้นที่ว่างเปล่า) */}
+              {/* อนิเมชันซ่อนและขยายช่องข้อมูลฝั่งรายได้ตามเงื่อนไข */}
               <AnimatePresence>
                 {Object.values(activeIncomes).some(Boolean) && (
                   <motion.div 
@@ -495,7 +504,7 @@ function Tax() {
                 </AnimatePresence>
               </div>
 
-              {/* ส่วนสไลด์เปิดฟิลด์กรอกข้อมูลฝั่งลดหย่อนเฉพาะตอนเปิดปุ่มย่อยสว่าง */}
+              {/* ส่วนสไลด์เปิดฟิลด์กรอกข้อมูลฝั่งลดหย่อน */}
               <AnimatePresence>
                 {Object.values(activeDeductions).some(Boolean) && (
                   <motion.div 
@@ -524,7 +533,25 @@ function Tax() {
                     {activeDeductions.thaiESG && activeDeductionCat === 'retirement' && <Input label={t.inputThaiESGAmount} value={deductionValues.thaiESGAmount} onChange={(e) => setDeductionValues({ ...deductionValues, thaiESGAmount: e.target.value })} placeholder="0" />}
                     
                     {activeDeductions.homeLoanInterest && activeDeductionCat === 'economy' && <Input label={t.inputHomeAmount} value={deductionValues.homeLoanAmount} onChange={(e) => setDeductionValues({ ...deductionValues, homeLoanAmount: e.target.value })} placeholder="0" />}
-                    {activeDeductions.easyReceipt && activeDeductionCat === 'economy' && <Input label={t.inputEasyAmount} value={deductionValues.easyReceiptAmount} onChange={(e) => setDeductionValues({ ...deductionValues, easyReceiptAmount: e.target.value })} placeholder="0" />}
+                    
+                    {/* ─── แตกกล่อง Input ดีไซน์เดิมของ Easy E-Receipt เป็น 2 ช่อง ─── */}
+                    {activeDeductions.easyReceipt && activeDeductionCat === 'economy' && (
+                      <div className="space-y-4 p-4 rounded-2xl bg-[#121215] border border-white/5">
+                        <Input 
+                          label={t.inputEasyGeneralAmount} 
+                          value={deductionValues.easyReceiptGeneralAmount} 
+                          onChange={(e) => setDeductionValues({ ...deductionValues, easyReceiptGeneralAmount: e.target.value })} 
+                          placeholder="0" 
+                        />
+                        <Input 
+                          label={t.inputEasyOtopAmount} 
+                          value={deductionValues.easyReceiptOtopAmount} 
+                          onChange={(e) => setDeductionValues({ ...deductionValues, easyReceiptOtopAmount: e.target.value })} 
+                          placeholder="0" 
+                        />
+                      </div>
+                    )}
+                    
                     {activeDeductions.localTravel && activeDeductionCat === 'economy' && <Input label={t.inputTravelAmount} value={deductionValues.localTravelAmount} onChange={(e) => setDeductionValues({ ...deductionValues, localTravelAmount: e.target.value })} placeholder="0" />}
                     
                     {activeDeductions.donationEdu && activeDeductionCat === 'donation' && <Input label={t.inputDonationEduAmount} value={deductionValues.donationEduAmount} onChange={(e) => setDeductionValues({ ...deductionValues, donationEduAmount: e.target.value })} placeholder="0" />}
