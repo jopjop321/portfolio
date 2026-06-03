@@ -54,10 +54,10 @@ function Wealth() {
             </span>
           </h1>
           
-          <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
+          {/* <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed">
             {t.heroDesc}
           </p>
-          
+           */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-5 w-full sm:w-auto">
             <a href="#calculator" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-[#C5A059] to-[#D4B872] text-black font-semibold rounded-full hover:scale-105 transition-transform duration-300 shadow-[0_0_30px_rgba(197,160,89,0.2)]">
