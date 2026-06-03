@@ -164,8 +164,6 @@ export const translations = {
     pensionSub: "Max 15% max 200,000 THB",
     rmfLabel: "RMF Fund Investment",
     rmfSub: "Max 30% (Retirement pool)",
-    ssfLabel: "SSF Fund Investment",
-    ssfSub: "Max 30% (Retirement pool)",
     thaiESGLabel: "ThaiESG Fund Investment",
     thaiESGSub: "Max 30% max 300,000 THB",
 
@@ -202,7 +200,6 @@ export const translations = {
     inputNsfAmount: "National Savings Fund (NSF/กอช.) investment amount",
     inputPensionAmount: "Total pension life insurance premiums paid",
     inputRmfAmount: "Total RMF mutual fund investment for the whole year",
-    inputSsfAmount: "Total SSF mutual fund investment for the whole year",
     inputThaiESGAmount: "Total ThaiESG mutual fund investment for the whole year",
     inputHomeAmount: "Actual home loan interest paid according to bank statement",
     inputTravelAmount: "Secondary city travel verified business expenses amount",
@@ -210,7 +207,24 @@ export const translations = {
     inputDonationGenAmount: "Actual donation amount paid to qualified charities or foundations",
     inputDonationPolAmount: "Actual donation amount paid to registered political parties",
     inputDonationPlh: "System will automatically calculate the 10% cap limit",
-    personsSuffix: "คน / Persons"
+    personsSuffix: "คน / Persons",
+
+    // 🌟 TAX STRATEGY SIMULATOR INSIGHTS
+    suggestTitle: "Tax Optimization Simulation",
+    suggestSubtitle: "Precision Quota Sandbox by IC Complex 2",
+    suggestInsuranceQuota: "Available General Insurance Quota",
+    suggestPensionQuota: "Available Pension Quota",
+    suggestRmfQuota: "Available RMF Quota",
+    suggestEsgQuota: "Available ThaiESG Quota",
+    simCardHeader: "Simulation Sandbox (Try entering amounts)",
+    simLifeLabel: "Try adding Life Insurance",
+    simPensionLabel: "Try adding Pension Insurance",
+    simRmfLabel: "Try adding RMF Fund",
+    simEsgLabel: "Try adding ThaiESG Fund",
+    suggestSimulatedTaxPayable: "Simulated Tax Payable",
+    suggestPotentialSave: "Simulated Tax Saved",
+    suggestMaximized: "Excellent! Your portfolio optimization strategy is fully maximized.",
+    suggestDisclaimer: "Disclaimer: This model offers dynamic simulations for mathematical planning and tax mapping illustrative purposes only. All asset selection execution should follow registered suitability and product risk assessments."
   },
   th: {
     navHome: "หน้าแรก",
@@ -376,8 +390,6 @@ export const translations = {
     pensionSub: "ไม่เกิน 15% สูงสุด 200,000 บ.",
     rmfLabel: "ลงทุนกองทุน RMF",
     rmfSub: "ไม่เกิน 30% (รวมกลุ่มเกษียณ)",
-    ssfLabel: "ลงทุนกองทุน SSF",
-    ssfSub: "ไม่เกิน 30% (รวมกลุ่มเกษียณ)",
     thaiESGLabel: "ลงทุนกองทุน ThaiESG",
     thaiESGSub: "ไม่เกิน 30% สูงสุด 300,000 บ.",
 
@@ -414,7 +426,6 @@ export const translations = {
     inputNsfAmount: "ยอดเงินส่งสะสมเข้ากองทุนการออมแห่งชาติ (กอช.)",
     inputPensionAmount: "ยอดจ่ายเบี้ยประกันชีวิตแบบบำนาญสะสมรวมตลอดทั้งปี",
     inputRmfAmount: "ยอดเงินลงทุนสะสมในกองทุนรวมเพื่อการเลี้ยงชีพ (RMF) ปีนี้",
-    inputSsfAmount: "ยอดเงินลงทุนสะสมในกองทุนรวมเพื่อการออม (SSF) ปีนี้",
     inputThaiESGAmount: "ยอดเงินลงทุนสะสมในกองทุนรวมเพื่อความยั่งยืนของไทย (ThaiESG)",
     inputHomeAmount: "ดอกเบี้ยเงินกู้ยืมเพื่อซื้อที่อยู่อาศัยที่จ่ายจริงตามใบเสร็จธนาคาร",
     inputTravelAmount: "ยอดค่าใช้จ่ายท่องเที่ยวเมืองรองตามเงื่อนไขมาตรการที่ระบุ",
@@ -422,6 +433,23 @@ export const translations = {
     inputDonationGenAmount: "จำนวนเงินที่บริจาคจริงให้แก่มูลนิธิ หรือสถานสาธารณกุศล",
     inputDonationPolAmount: "จำนวนเงินบริจาคให้แก่พรรคการเมืองตามจ่ายจริง",
     inputDonationPlh: "ระบบจะคุมเพดานหักลดหย่อนไม่เกิน 10% ให้โดยอัตโนมัติ",
-    personsSuffix: "คน / Persons"
+    personsSuffix: "คน / Persons",
+
+    // 🌟 TAX STRATEGY SIMULATOR INSIGHTS
+    suggestTitle: "กระดานจำลองการปรับปรุงภาษี",
+    suggestSubtitle: "กลยุทธ์คำนวณสิทธิ์คงเหลือโดยผู้เชี่ยวชาญ (IC Complex 2)",
+    suggestInsuranceQuota: "โควตาประกันชีวิตคงเหลือ",
+    suggestPensionQuota: "โควตาประกันบำนาญคงเหลือ",
+    suggestRmfQuota: "โควตากองทุน RMF คงเหลือ",
+    suggestEsgQuota: "โควตากองทุน ThaiESG คงเหลือ",
+    simCardHeader: "ห้องทดลองจำลองเงินลงทุนเพิ่ม (Sandbox)",
+    simLifeLabel: "ลองจำลองซื้อ ประกันชีวิตเพิ่ม",
+    simPensionLabel: "ลองจำลองซื้อ ประกันบำนาญเพิ่ม",
+    simRmfLabel: "ลองจำลองซื้อ กองทุน RMF เพิ่ม",
+    simEsgLabel: "ลองจำลองซื้อ กองทุน ThaiESG เพิ่ม",
+    suggestSimulatedTaxPayable: "ภาษีสุทธิหลังจำลองลงทุนเพิ่ม",
+    suggestPotentialSave: "จำนวนภาษีที่ประหยัดได้เพิ่ม",
+    suggestMaximized: "ยอดเยี่ยมมาก! พอร์ตโฟลิโอของคุณใช้สิทธิ์หักลดหย่อนภาษีได้เต็มประสิทธิภาพแล้ว",
+    suggestDisclaimer: "คำเตือน: โมดูลนี้เป็นระบบแบบจำลองสมการคณิตศาสตร์เพื่อการศึกษาการวางแผนภาษีเท่านั้น การจัดสรรการลงทุนในสินทรัพย์จริงควรเป็นไปตามระดับความเสี่ยงที่ยอมรับได้ (Suitability Profile) ของท่าน"
   }
 };
