@@ -12,7 +12,6 @@ const Navbar = () => {
     { name: lang === 'en' ? 'Works' : 'ผลงาน', href: '#works' },
     { name: lang === 'en' ? 'About' : 'เกี่ยวกับผม', href: '#about' },
     { name: lang === 'en' ? 'Contact' : 'ติดต่อ', href: '#contact' },
-    { name: t.navWealth, href: '/wealth', isLink: true } 
   ];
 
   return (
