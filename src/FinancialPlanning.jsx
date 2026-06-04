@@ -1,7 +1,7 @@
 // src/FinancialPlanning.jsx
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLanguage } from './App';
 import joppyLogo from './assets/Joppy.svg';
 
@@ -19,19 +19,19 @@ const localLang = {
     row2Label: "⏳ Medium & Long-Term Focus (Ranks 5 - 8)",
     proceedBtn: "Proceed to Tax Optimization (TaxOS) →",
     
-    // คอนเซปต์แผ่นกระดาษจริง (Real Physical Paper Metaphor)
-    frontPage: "📝 Paper: Front Side (Cash Flow)",
-    backPage: "📝 Paper: Flip to Back (Wealth Balance)",
+    // คอนเซปต์แผ่นกระดาษจริง
+    frontPage: "📄 Paper: Front Side (Cash Flow Grid)",
+    backPage: "📄 Paper: Back Side (Wealth Balance Sheet)",
     incomeTitle: "✍️ Left Column: Write down your Income",
     expenseTitle: "✍️ Right Column: Write down your Expenses",
-    assetTitle: "✍️ Flip Back - Left Column: All Assets",
-    liabilityTitle: "✍️ Flip Back - Right Column: All Liabilities",
+    assetTitle: "✍️ Left Column: Write down all Assets",
+    liabilityTitle: "✍️ Right Column: Write down all Liabilities",
     
     incomeInput: "Monthly Gross Income",
     otherIncomeInput: "Other Income / Annual Lump Sum (Bonus, Incentives)",
     fixedExpenseTitle: "1. Regular / Monthly Expenses (Split in half)",
     essentialLabel: "Essential Costs (Bills, Rent, Commute, Insurance)",
-    rewardLabel: "Self-Rewards (Dining out, Shopping, Entertainment)",
+    rewardLabel: "Self-Rewards (Dining out, Shopping, Entertainment, Services)",
     bigTicketTitle: "2. Annual Big-Ticket Expenses (Lump sums)",
     bigTicketLabel: "Large Sums Due This Year (Annual Insurance, Big Trips, Tax)",
     assetLabel: "Total Investment Assets & Cash (Stocks, Land, Savings)",
@@ -58,13 +58,13 @@ const localLang = {
     row2Label: "⏳ แถวที่ 2: กลุ่มเป้าหมายและการวางแผนระยะยาว (อันดับ 5 - 8)",
     proceedBtn: "วางแผนกลยุทธ์ลดหย่อนภาษีต่อ (TaxOS) →",
     
-    // คอนเซปต์แผ่นกระดาษจริง (Real Physical Paper Metaphor)
-    frontPage: "📝 หน้ากระดาษฝั่งขวา-ซ้าย: รายรับ - รายจ่าย",
-    backPage: "📝 พลิกหลังกระดาษฝั่งขวา-ซ้าย: ทรัพย์สิน - หนี้สิน",
+    // คอนเซปต์แผ่นกระดาษจริง
+    frontPage: "📄 แผ่นหน้า: โครงสร้างกระแสเงินสด (Cash Flow)",
+    backPage: "📄 แผ่นหลัง: งบดุลความมั่งคั่ง (Wealth Balance)",
     incomeTitle: "✍️ ฝั่งซ้ายของกระดาษ: เขียนรายได้ของคุณ",
     expenseTitle: "✍️ ฝั่งขวาของกระดาษ: เขียนรายจ่าย",
-    assetTitle: "✍️ พลิกแผ่นหลัง ฝั่งซ้าย: เขียนสินทรัพย์ทั้งหมดที่มี",
-    liabilityTitle: "✍️ พลิกแผ่นหลัง ฝั่งขวา: เขียนหนี้สินทั้งหมดที่มี",
+    assetTitle: "✍️ ฝั่งซ้ายของกระดาษ: เขียนสินทรัพย์ทั้งหมดที่มี",
+    liabilityTitle: "✍️ ฝั่งขวาของกระดาษ: เขียนหนี้สินทั้งหมดที่มี",
     
     incomeInput: "จำนวนรายได้พึงประเมินรวม (ต่อเดือน)",
     otherIncomeInput: "รายได้อื่นๆ / เงินก้อนรายปี (โบนัส, เงินพิเศษ)",
@@ -167,7 +167,7 @@ export default function FinancialPlanning() {
     setter(num < 0 ? 0 : num);
   };
 
-  // ─── 📊 PIPELINE ENGINE: CALCULATE BALANCES (ตรรกะคุมระบบตามสั่งแยกรายเดือน/รายปี) ───
+  // ─── 📊 PIPELINE ENGINE: CALCULATE BALANCES ───
   const financialReport = useMemo(() => {
     const vIncome = Number(income) || 0;
     const vOtherIncomeAnnual = Number(otherIncome) || 0; 
@@ -175,12 +175,10 @@ export default function FinancialPlanning() {
     const vReward = Number(expenseReward) || 0;
     const vBigTicketAnnual = Number(expenseBigTicket) || 0; 
 
-    // 1. กระแสเงินสดรายเดือน: สกัดรายได้ใหญ่และรายจ่ายใหญ่ออกอย่างเด็ดขาดตามสั่ง
     const totalIncomeMonthly = vIncome;
     const totalExpenseMonthly = vEssential + vReward;
     const netCashflowMonthly = totalIncomeMonthly - totalExpenseMonthly;
 
-    // 2. กระแสเงินสดรายปี (ช่องบวกเพิ่มใหม่): นำส่วนต่างรายเดือนคูณ 12 แล้วบวกหักลบด้วยเงินก้อนประจำปี
     const netCashflowAnnual = (netCashflowMonthly * 12) + vOtherIncomeAnnual - vBigTicketAnnual;
 
     const vAssets = Number(assets) || 0;
@@ -313,43 +311,25 @@ export default function FinancialPlanning() {
                 {t.step2Sub}
               </p>
             </div>
-            
-            <div className="flex p-1 bg-[#121215] border border-white/5 rounded-xl gap-1 shrink-0">
-              <button
-                onClick={() => setPaperPage('front')}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-300 ${
-                  paperPage === 'front' ? 'bg-[#C5A059] text-black shadow-md' : 'text-zinc-500 hover:text-zinc-300'
-                }`}
-              >
-                {t.frontPage}
-              </button>
-              <button
-                onClick={() => setPaperPage('back')}
-                className={`px-4 py-2 text-xs font-semibold rounded-lg transition-all duration-300 ${
-                  paperPage === 'back' ? 'bg-[#C5A059] text-black shadow-md' : 'text-zinc-500 hover:text-zinc-300'
-                }`}
-              >
-                {t.backPage}
-              </button>
-            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* โครงสร้างตัวแผ่นกระดาษจําลองพับครึ่ง ซ้าย - ขวา (สมมาตรสมบูรณ์แบบ) */}
-            <div className="lg:col-span-8 bg-[#070709] border-2 border-white/10 rounded-3xl min-h-[460px] relative overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/5">
+            <div className="lg:col-span-8 space-y-8">
               
-              <AnimatePresence mode="wait">
-                {paperPage === 'front' ? (
-                  <>
-                    {/* แผ่นหน้า - ฝั่งซ้ายกระดาษ: รายได้ประจำ และ รายได้ก้อนใหญ่ */}
-                    <motion.div key="front-left" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} className="p-6 md:p-8 space-y-6">
-                      <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
-                        <div className="w-1.5 h-3.5 bg-[#E28743] rounded-full" />
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.incomeTitle}</h3>
-                      </div>
-                      
-                      {/* รายได้ประจำหลัก */}
+              {/* แผ่นหน้า (กระแสรายรับ - รายจ่ายรายเดือน) */}
+              <div className="space-y-2">
+                <span className="text-xs font-semibold tracking-wide text-zinc-400 block pl-1">{t.frontPage}</span>
+                <div className="bg-[#070709] border-2 border-white/10 rounded-3xl min-h-[380px] relative overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/5">
+                  
+                  {/* ฝั่งซ้ายแผ่นหน้า: รายได้หลักประจำ และ รายได้ก้อนใหญ่ประจำปี */}
+                  <div className="p-6 md:p-8 space-y-6">
+                    <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
+                      <div className="w-1.5 h-3.5 bg-[#E28743] rounded-full" />
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.incomeTitle}</h3>
+                    </div>
+                    
+                    <div className="space-y-4">
                       <div className="space-y-4 bg-black/40 p-4 rounded-2xl border border-white/5 min-h-[142px] flex flex-col justify-center">
                         <h4 className="text-xs font-extrabold text-[#C5A059] uppercase tracking-widest">{lang === 'th' ? "รายได้หลักประจำ" : "Primary Income"}</h4>
                         <div className="space-y-1.5">
@@ -365,7 +345,6 @@ export default function FinancialPlanning() {
                         </div>
                       </div>
 
-                      {/* รายได้อื่นๆ / โบนัสก้อนใหญ่รายปี */}
                       <div className="space-y-4 bg-black/40 p-4 rounded-2xl border border-white/5 min-h-[118px] flex flex-col justify-center">
                         <h4 className="text-xs font-extrabold text-zinc-300 uppercase tracking-widest">{lang === 'th' ? "รายได้ก้อนใหญ่ / โบนัสรายปี" : "Annual Lump Sum"}</h4>
                         <div className="space-y-1.5">
@@ -380,16 +359,17 @@ export default function FinancialPlanning() {
                           />
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
+                  </div>
 
-                    {/* แผ่นหน้า - ฝั่งขวากระดาษ: รายจ่ายประจำ และ รายจ่ายก้อนใหญ่รายปี */}
-                    <motion.div key="front-right" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} className="p-6 md:p-8 space-y-6 bg-white/[0.01]">
-                      <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
-                        <div className="w-1.5 h-3.5 bg-[#FF6F61] rounded-full" />
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.expenseTitle}</h3>
-                      </div>
+                  {/* ฝั่งขวาแผ่นหน้า: รายจ่ายประจำสัดส่วน จำเป็น/รางวัล และรายจ่ายก้อนใหญ่รายปี */}
+                  <div className="p-6 md:p-8 space-y-6 bg-white/[0.01]">
+                    <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
+                      <div className="w-1.5 h-3.5 bg-[#FF6F61] rounded-full" />
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.expenseTitle}</h3>
+                    </div>
 
-                      {/* รายจ่ายประจำทุกเดือน (จำเป็น / รางวัล) */}
+                    <div className="space-y-4">
                       <div className="space-y-4 bg-black/40 p-4 rounded-2xl border border-white/5 min-h-[142px]">
                         <h4 className="text-xs font-extrabold text-[#C5A059] uppercase tracking-widest">{t.fixedExpenseTitle}</h4>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -404,58 +384,64 @@ export default function FinancialPlanning() {
                         </div>
                       </div>
 
-                      {/* รายจ่ายก้อนใหญ่ในปีนี้ */}
                       <div className="space-y-4 bg-black/40 p-4 rounded-2xl border border-white/5 min-h-[118px] flex flex-col justify-center">
                         <h4 className="text-xs font-extrabold text-zinc-300 uppercase tracking-widest">{t.bigTicketTitle}</h4>
                         <div className="space-y-1.5">
                           <label className="text-[10px] font-bold text-zinc-500 block leading-tight">{t.bigTicketLabel}</label>
-                          <input type="number" min="0" value={expenseBigTicket} placeholder="0" onChange={(e) => handleInputShield(e.target.value, setExpenseBigTicket)} className="w-full bg-[#121214] border border-white/5 rounded-xl px-4 py-2.5 text-white outline-none focus:border-[#C5A059] font-bold text-base text-right" />
+                          <input type="number" min="0" value={expenseBigTicket} placeholder="0" onChange={(e) => handleInputShield(e.target.value, setExpenseBigTicket)} className="w-full bg-[#121214] border border-white/5 rounded-xl px-4 py-2.5 text-white text-right outline-none focus:border-[#C5A059] font-bold text-base text-right" />
                         </div>
                       </div>
-                    </motion.div>
-                  </>
-                ) : (
-                  <>
-                    {/* พลิกแผ่นหลัง - ฝั่งซ้ายกระดาษ: สินทรัพย์ */}
-                    <motion.div key="back-left" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -10 }} className="p-6 md:p-8 space-y-5">
-                      <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
-                        <div className="w-1.5 h-3.5 bg-[#24A19C] rounded-full" />
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.assetTitle}</h3>
-                      </div>
-                      <div className="space-y-4 bg-black/40 p-5 rounded-2xl border border-white/5 min-h-[200px] flex flex-col justify-center">
-                        <label className="text-xs font-semibold text-zinc-400 block mb-1">{t.assetLabel}</label>
-                        <input
-                          type="number"
-                          min="0"
-                          value={assets}
-                          placeholder="0"
-                          onChange={(e) => handleInputShield(e.target.value, setAssets)}
-                          className="w-full bg-[#121214] border border-white/5 rounded-xl px-5 py-4 text-white outline-none focus:border-[#C5A059] text-xl font-bold"
-                        />
-                      </div>
-                    </motion.div>
+                    </div>
+                  </div>
 
-                    {/* พลิกแผ่นหลัง - ฝั่งขวากระดาษ: หนี้สิน */}
-                    <motion.div key="back-right" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 10 }} className="p-6 md:p-8 space-y-5 bg-white/[0.01]">
-                      <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
-                        <div className="w-1.5 h-3.5 bg-[#92A8D1] rounded-full" />
-                        <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.liabilityTitle}</h3>
-                      </div>
-                      <div className="space-y-4 bg-black/40 p-5 rounded-2xl border border-white/5 min-h-[200px] flex flex-col justify-center">
-                        <label className="text-xs font-semibold text-zinc-400 block mb-1">{t.liabilityLabel}</label>
-                        <input
-                          type="number"
-                          min="0"
-                          value={liabilities}
-                          placeholder="0"
-                          onChange={(e) => handleInputShield(e.target.value, setLiabilities)}
-                          className="w-full bg-[#121214] border border-white/5 rounded-xl px-5 py-4 text-white outline-none focus:border-[#C5A059] text-xl font-bold text-right"
-                        />
-                      </div>
-                    </motion.div>
-                  </>
-                )}
-              </AnimatePresence>
+                </div>
+              </div>
+
+              {/* แผ่นหลัง (งบดุลมูลค่าสินทรัพย์สะสม - หนี้สินคงค้าง) */}
+              <div className="space-y-2">
+                <span className="text-xs font-semibold tracking-wide text-zinc-500 block pl-1">{t.backPage}</span>
+                <div className="bg-[#070709] border-2 border-white/10 rounded-3xl min-h-[260px] relative overflow-hidden shadow-2xl grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-white/5">
+                  
+                  {/* ฝั่งซ้ายแผ่นหลัง: มูลค่าสินทรัพย์สะสมรวม */}
+                  <div className="p-6 md:p-8 space-y-5">
+                    <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
+                      <div className="w-1.5 h-3.5 bg-[#24A19C] rounded-full" />
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.assetTitle}</h3>
+                    </div>
+                    <div className="space-y-4 bg-black/40 p-5 rounded-2xl border border-white/5 min-h-[160px] flex flex-col justify-center">
+                      <label className="text-xs font-semibold text-zinc-400 block mb-1">{t.assetLabel}</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={assets}
+                        placeholder="0"
+                        onChange={(e) => handleInputShield(e.target.value, setAssets)}
+                        className="w-full bg-[#121214] border border-white/5 rounded-xl px-5 py-4 text-white outline-none focus:border-[#C5A059] text-xl font-bold"
+                      />
+                    </div>
+                  </div>
+
+                  {/* ฝั่งขวาแผ่นหลัง: มูลค่าภาระหนี้สินคงค้างทั้งหมด */}
+                  <div className="p-6 md:p-8 space-y-5 bg-white/[0.01]">
+                    <div className="flex items-center space-x-2 border-b border-white/5 pb-2.5">
+                      <div className="w-1.5 h-3.5 bg-[#92A8D1] rounded-full" />
+                      <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-200">{t.liabilityTitle}</h3>
+                    </div>
+                    <div className="space-y-4 bg-black/40 p-5 rounded-2xl border border-white/5 min-h-[160px] flex flex-col justify-center">
+                      <label className="text-xs font-semibold text-zinc-400 block mb-1">{t.liabilityLabel}</label>
+                      <input
+                        type="number"
+                        min="0"
+                        value={liabilities}
+                        placeholder="0"
+                        onChange={(e) => handleInputShield(e.target.value, setLiabilities)}
+                        className="w-full bg-[#121214] border border-white/5 rounded-xl px-5 py-4 text-white outline-none focus:border-[#C5A059] text-xl font-bold text-right"
+                      />
+                    </div>
+                  </div>
+
+                </div>
+              </div>
 
             </div>
 
@@ -474,7 +460,7 @@ export default function FinancialPlanning() {
                 </div>
               </div>
 
-              {/* 💵 ส่วนต่างกระแสเงินสดสภาพคล่องคงเหลือรายเดือน (สกัดเงินก้อนออกแล้ว) */}
+              {/* ส่วนต่างกระแสเงินสดสภาพคล่องคงเหลือรายเดือน */}
               <div className="bg-[#C5A059]/5 border border-white/10 rounded-xl p-4 flex justify-between items-center">
                 <div className="space-y-0.5">
                   <span className="text-[10px] text-zinc-400 block font-bold uppercase tracking-wide">{t.netCashflow}</span>
@@ -485,7 +471,7 @@ export default function FinancialPlanning() {
                 </span>
               </div>
 
-              {/* 🌟 ช่องบวกเพิ่มใหม่: กระแสเงินสดคงเหลือสะสมสุทธิรายปี (รวมโบนัสและรายจ่ายใหญ่) */}
+              {/* กระแสเงินสดคงเหลือสะสมสุทธิรายปี */}
               <div className="bg-[#C5A059]/10 border border-[#C5A059]/20 rounded-xl p-4 flex justify-between items-center shadow-inner">
                 <div className="space-y-0.5">
                   <span className="text-[10px] text-zinc-400 block font-bold uppercase tracking-wide">{t.netCashflowYear}</span>
@@ -496,7 +482,7 @@ export default function FinancialPlanning() {
                 </span>
               </div>
 
-              {/* มูลค่าความมั่งคั่งสุทธิรวม (Net Worth) */}
+              {/* มูลค่าความมั่งคั่งสุทธิรวม */}
               <div className="bg-white/[0.02] border border-white/5 rounded-xl p-4 flex justify-between items-center">
                 <div className="space-y-0.5">
                   <span className="text-[10px] text-zinc-400 block font-bold uppercase tracking-wide">{t.netWorth}</span>
@@ -506,14 +492,8 @@ export default function FinancialPlanning() {
                   ฿{financialReport.netWorth.toLocaleString()}
                 </span>
               </div>
-
-              <div className="pt-2">
-                <Link to="/tax" className="w-full">
-                  <button className="w-full py-4 bg-gradient-to-r from-[#C5A059] to-[#D4B872] text-black font-bold rounded-full hover:scale-[1.01] active:scale-[0.99] transition-transform duration-300 shadow-[0_0_30px_rgba(197,160,89,0.15)] text-xs tracking-wide">
-                    {t.proceedBtn}
-                  </button>
-                </Link>
-              </div>
+              
+              {/* 🛠️ ลบตัวบล็อก <div className="pt-2"> <Link to="/tax"> ... </Link> </div> ออกเรียบร้อยครับ */}
             </div>
 
           </div>
