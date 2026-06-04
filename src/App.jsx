@@ -1,10 +1,11 @@
 // src/App.jsx
 import React, { useState, createContext, useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './Home'; // หน้า Gateway ตัวเลือกใหม่
-import Portfolio from './Portfolio'; // ผลงานเดิมที่เปลี่ยนชื่อไฟล์
+import Home from './Home'; 
+import Portfolio from './Portfolio'; 
 import Wealth from './Wealth';
 import Tax from './Tax';
+import FinancialPlanning from './FinancialPlanning'; // 🛠️ นำเข้าหน้าวางแผนการเงินอันใหม่
 
 const LanguageContext = createContext();
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/portfolio" element={<Portfolio />} />
         <Route path="/wealth" element={<Wealth />} />
         <Route path="/tax" element={<Tax />} />
+        <Route path="/planning" element={<FinancialPlanning />} /> {/* 🛠️ เปิดพิกัดปัก Route ใหม่ */}
       </Routes>
     </LanguageContext.Provider>
   );
