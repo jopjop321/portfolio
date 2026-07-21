@@ -10,6 +10,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: lang === 'en' ? 'Works' : 'ผลงาน', href: '#works' },
+    { name: lang === 'en' ? 'Activities' : 'กิจกรรม', href: '#activities' },
     { name: lang === 'en' ? 'About' : 'เกี่ยวกับผม', href: '#about' },
     { name: lang === 'en' ? 'Contact' : 'ติดต่อ', href: '#contact' },
   ];
