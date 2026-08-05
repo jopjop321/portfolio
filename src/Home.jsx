@@ -32,82 +32,58 @@ function Home() {
       <main className="w-full max-w-6xl mx-auto px-6 relative z-10 my-auto py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
 
-          {/* การ์ดฝั่งซ้าย: Portfolio (ผลงานพัฒนาซอฟต์แวร์) */}
+          {/* การ์ดฝั่งซ้าย: Portfolio */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Link to="/portfolio" className="group block h-full bg-[#0A0A0C] border border-white/5 hover:border-zinc-700/50 rounded-3xl p-8 md:p-12 relative overflow-hidden transition-all duration-500 shadow-2xl hover:shadow-[0_10px_40px_rgba(255,255,255,0.02)]">
+            <Link to="/portfolio" className="group flex flex-col h-full min-h-[300px] justify-between bg-[#0A0A0C] border border-white/5 hover:border-zinc-700/50 rounded-3xl p-8 md:p-12 relative overflow-hidden transition-all duration-500 shadow-2xl hover:shadow-[0_10px_40px_rgba(255,255,255,0.02)]">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.01] rounded-bl-full group-hover:bg-white/[0.02] transition-colors duration-500" />
 
-              <span className="text-xs uppercase tracking-widest text-zinc-500 font-medium block mb-4">
-                {lang === 'en' ? 'Engineering & Design' : 'วิศวกรรมและการออกแบบ'}
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4 group-hover:text-zinc-200 transition-colors">
-                {lang === 'en' ? 'Explore Portfolio.' : 'สำรวจพอร์ตโฟลิโอ.'}
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+                {lang === 'en' ? 'Portfolio' : 'พอร์ตโฟลิโอ'}
               </h2>
-              <p className="text-sm text-zinc-400 leading-relaxed font-light mb-12 max-w-sm">
-                {lang === 'en'
-                  ? 'Dive into technical production-grade applications, full-stack architectures, and custom enterprise system deployments.'
-                  : 'เจาะลึกระบบซอฟต์แวร์ประยุกต์ สถาปัตยกรรมระบบ และแพลตฟอร์มบริหารจัดการหน้าร้านที่ถูกพัฒนาขึ้นจริง'}
-              </p>
 
-              <div className="text-xs font-semibold tracking-wider text-white bg-white/5 border border-white/10 rounded-full px-5 py-2.5 inline-flex items-center gap-2 group-hover:bg-white group-hover:text-black transition-all duration-300">
+              <div className="text-xs font-semibold tracking-wider text-white bg-white/5 border border-white/10 rounded-full px-5 py-2.5 inline-flex items-center gap-2 w-fit group-hover:bg-white group-hover:text-black transition-all duration-300">
                 {lang === 'en' ? 'View Works' : 'ดูรายการผลงาน'} <span>→</span>
               </div>
             </Link>
           </motion.div>
 
-          {/* การ์ดฝั่งขวา: Wealth Management (Tax Engine & Analytics) */}
+          {/* การ์ดฝั่งขวา: Wealth Management */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
           >
-            <Link to="/wealth" className="group block h-full bg-[#0A0A0C] border border-[#C5A059]/10 hover:border-[#C5A059]/40 rounded-3xl p-8 md:p-12 relative overflow-hidden transition-all duration-500 shadow-2xl hover:shadow-[0_10px_40px_rgba(197,160,89,0.03)]">
+            <Link to="/wealth" className="group flex flex-col h-full min-h-[300px] justify-between bg-[#0A0A0C] border border-[#C5A059]/10 hover:border-[#C5A059]/40 rounded-3xl p-8 md:p-12 relative overflow-hidden transition-all duration-500 shadow-2xl hover:shadow-[0_10px_40px_rgba(197,160,89,0.03)]">
               <div className="absolute top-0 right-0 w-32 h-32 bg-[#C5A059]/[0.02] rounded-bl-full group-hover:bg-[#C5A059]/[0.04] transition-colors duration-500" />
 
-              <span className="text-xs uppercase tracking-widest text-[#C5A059] font-medium block mb-4">
-                {lang === 'en' ? 'Private Banking Tools' : 'ระบบจัดการความมั่งคั่ง'}
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[#C5A059] mb-4 group-hover:text-[#dfb76c] transition-colors">
-                {lang === 'en' ? 'Wealth & Tax Engine.' : 'ระบบคำนวณและวางแผนภาษี.'}
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#C5A059] group-hover:text-[#dfb76c] transition-colors">
+                {lang === 'en' ? 'Wealth & Tax' : 'ภาษีและความมั่งคั่ง'}
               </h2>
-              <p className="text-sm text-zinc-400 leading-relaxed font-light mb-12 max-w-sm">
-                {lang === 'en'
-                  ? 'Simulate continuous compound interest forecasting alongside high-efficiency progressive personal tax optimization sandboxes.'
-                  : 'แบบจำลองการเติบโตของสินทรัพย์ทบต้น พร้อมห้องทดลองสิทธิ์หักลดหย่อนภาษีบุคคลธรรมดาที่มีความถูกต้องแม่นยำสูง'}
-              </p>
 
-              <div className="text-xs font-semibold tracking-wider text-[#C5A059] bg-[#C5A059]/10 border border-[#C5A059]/20 rounded-full px-5 py-2.5 inline-flex items-center gap-2 group-hover:bg-[#C5A059] group-hover:text-black transition-all duration-300">
-                {t.btnCalculate || 'Launch Tool'} <span>→</span>
+              <div className="text-xs font-semibold tracking-wider text-[#C5A059] bg-[#C5A059]/10 border border-[#C5A059]/20 rounded-full px-5 py-2.5 inline-flex items-center gap-2 w-fit group-hover:bg-[#C5A059] group-hover:text-black transition-all duration-300">
+                {t.btnCalculate || (lang === 'en' ? 'Launch Tool' : 'เริ่มคำนวณ')} <span>→</span>
               </div>
             </Link>
           </motion.div>
 
-          {/* การ์ดใบที่ 3: ระบบวางแผนการเงิน (ไหลลงมาอยู่แถวที่ 2 อัตโนมัติด้วยขนาดเท่าเดิม) */}
+          {/* การ์ดใบที่ 3: ระบบวางแผนการเงิน */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
           >
-            <Link to="/planning" className="group block h-full bg-[#0A0A0C] border border-white/5 hover:border-zinc-700/50 rounded-3xl p-8 md:p-12 relative overflow-hidden transition-all duration-500 shadow-2xl hover:shadow-[0_10px_40px_rgba(255,255,255,0.02)]">
+            <Link to="/planning" className="group flex flex-col h-full min-h-[300px] justify-between bg-[#0A0A0C] border border-white/5 hover:border-zinc-700/50 rounded-3xl p-8 md:p-12 relative overflow-hidden transition-all duration-500 shadow-2xl hover:shadow-[0_10px_40px_rgba(255,255,255,0.02)]">
               <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.01] rounded-bl-full group-hover:bg-white/[0.02] transition-colors duration-500" />
 
-              <span className="text-xs uppercase tracking-widest text-zinc-500 font-medium block mb-4">
-                {lang === 'en' ? 'Financial Planning' : 'การวางแผนการเงิน'}
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4 group-hover:text-zinc-200 transition-colors">
-                {lang === 'en' ? 'Financial Planning.' : 'ระบบวางแผนการเงิน.'}
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white group-hover:text-zinc-200 transition-colors">
+                {lang === 'en' ? 'Financial Planning' : 'วางแผนการเงิน'}
               </h2>
-              <p className="text-sm text-zinc-400 leading-relaxed font-light mb-12 max-w-sm">
-                {lang === 'en'
-                  ? 'Sort your financial goals, map income and expenses, and track your asset liability sheet layout.'
-                  : 'จัดอันดับความกกังวลทางการเงิน จัดหมวดหมู่รายรับ รายจ่าย และพอร์ตทรัพย์สินหนี้สินด้วยวิธีพับกระดาษ'}
-              </p>
 
-              <div className="text-xs font-semibold tracking-wider text-white bg-white/5 border border-white/10 rounded-full px-5 py-2.5 inline-flex items-center gap-2 group-hover:bg-white group-hover:text-black transition-all duration-300">
+              <div className="text-xs font-semibold tracking-wider text-white bg-white/5 border border-white/10 rounded-full px-5 py-2.5 inline-flex items-center gap-2 w-fit group-hover:bg-white group-hover:text-black transition-all duration-300">
                 {lang === 'en' ? 'Start Planning' : 'เริ่มต้นวางแผนการเงิน'} <span>→</span>
               </div>
             </Link>

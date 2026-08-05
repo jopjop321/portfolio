@@ -1,5 +1,6 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" },
+    { "source": "/game/:path*", "destination": "https://gameder-woad.vercel.app:path*" }
   ]
 }
